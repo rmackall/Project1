@@ -4,13 +4,12 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-small-business/blob/master/LICENSE)
  */
 
- body {
-    padding-top: 54px;
+body {
+  padding-top: 54px;
+}
+
+@media (min-width: 992px) {
+  body {
+    padding-top: 56px;
   }
-  
-  @media (min-width: 992px) {
-    body {
-      padding-top: 56px;
-    }
-  }
-  
+}
