@@ -115,26 +115,38 @@ function apiSongKickRun() {
                     for (i = 0; i < response.resultsPage.results.event.length; i++) { // for loop to process all upcoming events into eventsAllObj
                         if (response.resultsPage.results.event[i].start.date >= "2018-11-20" && response.resultsPage.results.event[i].start.date <= "2018-12-31") {  // specify date range
                             if (response.resultsPage.results.event[i].flaggedAsEnded == false) {  // check event not ended
-                                console.log(response.resultsPage.results.event[i]);
-                                eventsAllObj.push({  // push event details to eventsAllObj array for easier access
-                                    num: "event" + (eventsAllObj.length + 1),
-                                    name: response.resultsPage.results.event[i].displayName,
-                                    venue:  response.resultsPage.results.event[i].venue.displayName,
-                                    artist:  response.resultsPage.results.event[i].performance[0].artist.displayName,
-                                    startdate:  response.resultsPage.results.event[i].start.date,
-                                    starttime:  response.resultsPage.results.event[i].start.time,
-                                    url:  response.resultsPage.results.event[i].uri,
-                                });
-                                console.log(eventsAllObj);
+                                if (response.resultsPage.results.event[i].status != "cancelled") {  // check event not cancelled
+                                    console.log(response.resultsPage.results.event[i]);
+                                    eventsAllObj.push({  // push event details to eventsAllObj array for easier access
+                                        num: "event" + (eventsAllObj.length + 1),
+                                        name: response.resultsPage.results.event[i].displayName,
+                                        venue:  response.resultsPage.results.event[i].venue.displayName,
+                                        venuelocation: response.resultsPage.results.event[i].location.city,
+                                        artist:  response.resultsPage.results.event[i].performance[0].artist.displayName,
+                                        startdate:  response.resultsPage.results.event[i].start.date,
+                                        starttime:  response.resultsPage.results.event[i].start.time,
+                                        url:  response.resultsPage.results.event[i].uri,
+                                    });
+                                    console.log(eventsAllObj);
+                                }
                             }
                         }    
                     }
 
+                    $("#form-results-events").empty();
                     for (var i = 0; i < 5; i++) {
                         var x = Math.floor(Math.random()*eventsAllObj.length);
                         console.log("x is " + x);
                         eventsObj.push(eventsAllObj[x]);
                         eventsAllObj.splice(x, 1);
+                        $("#form-results-events").append('\
+                            <p>num: ' + eventsObj[i].num + '</p>\
+                            <p>name: ' + eventsObj[i].name + '</p>\
+                            <p>artist: ' + eventsObj[i].artist + '</p>\
+                            <p>venue: ' + eventsObj[i].venue + '</p>\
+                            <p>startdate: ' + eventsObj[i].startdate + '</p>\
+                            <br>\
+                        ');
                     }
                     console.log(eventsAllObj);
                     console.log(eventsObj);
