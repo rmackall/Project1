@@ -35,32 +35,17 @@ function populatedropdown(dayfield, monthfield, yearfield) {
     yearfield.options[0]=new Option(today.getFullYear(), today.getFullYear(), true, true) //select today's year
 }
 
-//populatedropdown(id_of_day_select, id_of_month_select, id_of_year_select)
+// On load, populate date field and run initial songkick
 window.onload=function(){
     populatedropdown("daydropdown", "monthdropdown", "yeardropdown")
+    // setTimeout(function() {
+        apiSongKickRun();
+        console.log("ran apiSongKickRun");
+    // }, 2000);
 }
 
 
-// Location Field
-// $("#form-location-use-current-btn").click(function () {
-//     if (apiSongKickQuery != "clientip") {
-//         apiSongKickQuery = "clientip";
-//         $("#form-location-field").val("Using Current Location");
-//     }
-//     else {
-//         apiSongKickQuery = "";
-//         $("#form-location-field").val("");
-//         $("#form-location-field").attr("placeholder", "Enter A Location");
-//     }
-// });
-
-$(document).on("click", "#form-run-songkick", function() {
-    if (apiSongKickQuery != "clientip") {
-        apiSongKickQuery = $("#form-location-field").val();
-    }
-    console.log(apiSongKickQuery);
-});
-
+// Listeners
 $(document).on("click", "#form-run-songkick", function() {
     apiSongKickRun();
 });
@@ -68,7 +53,10 @@ $(document).on("click", "#form-run-songkick", function() {
 // SONGKICK API REQUEST - pulls event details and pushes into eventsAllObj array
 function apiSongKickRun() {
 
-    // var apiSongKickEnteredLocation = 
+    eventsAllObj = [];
+    eventsObj = [];
+
+    apiSongKickQuery = $("#form-location-field").val();
   
     var queryURL = "https://api.songkick.com/api/3.0/search/locations.json?query=" + apiSongKickQuery + "&apikey=" + apiSongKickKey;  // api query to identify location ID
 
@@ -83,9 +71,10 @@ function apiSongKickRun() {
 
         .then(function(response) {
 
+            // CONVERT INPUT LOCATION TO SONGKICK LOCATION ID
             response.resultsPage.results.location[0];
-            console.log(response);
-            console.log(response.resultsPage.results.location[0].metroArea)
+            // console.log(response);
+            // console.log(response.resultsPage.results.location[0].metroArea)
             locationCity = response.resultsPage.results.location[0].metroArea.displayName;
             var locationState = "";
             if (response.resultsPage.results.location[0].metroArea.state != undefined) {
@@ -94,11 +83,11 @@ function apiSongKickRun() {
             locationCountry = response.resultsPage.results.location[0].metroArea.country.displayName;
             $("#form-results-location").html(locationCity + ", " + locationState + " " + locationCountry)
             locationLat = response.resultsPage.results.location[0].metroArea.lat;
-            console.log("locationLat is " + locationLat);
             locationLng = response.resultsPage.results.location[0].metroArea.lng;
-            console.log("locationLong is " + locationLng);
             locationID = response.resultsPage.results.location[0].metroArea.id;
+            console.log("locationID is " + locationID);
 
+            // RUN QUERY
             var queryURL = "https://api.songkick.com/api/3.0/metro_areas/" + locationID + "/calendar.json?apikey=" + apiSongKickKey;  // api query using location ID
 
             console.log(queryURL);
@@ -114,7 +103,7 @@ function apiSongKickRun() {
                         if (response.resultsPage.results.event[i].start.date >= "2018-11-20" && response.resultsPage.results.event[i].start.date <= "2018-12-31") {  // specify date range
                             if (response.resultsPage.results.event[i].flaggedAsEnded == false) {  // check event not ended
                                 if (response.resultsPage.results.event[i].status != "cancelled") {  // check event not cancelled
-                                    console.log(response.resultsPage.results.event[i]);
+                                    // console.log(response.resultsPage.results.event[i]);
                                     eventsAllObj.push({  // push event details to eventsAllObj array for easier access
                                         num: "event" + (eventsAllObj.length + 1),
                                         name: response.resultsPage.results.event[i].displayName,
@@ -125,19 +114,19 @@ function apiSongKickRun() {
                                         starttime:  response.resultsPage.results.event[i].start.time,
                                         url:  response.resultsPage.results.event[i].uri,
                                     });
-                                    console.log(eventsAllObj);
                                 }
                             }
                         }    
                     }
+                    console.log(eventsAllObj);
 
                     $("#form-results-events").empty();
-                    for (var i = 0; i < 5; i++) {
+                    for (var i = 0; i < 6; i++) {
                         var x = Math.floor(Math.random()*eventsAllObj.length);
-                        console.log("x is " + x);
+                        // console.log("x is " + x);
                         eventsObj.push(eventsAllObj[x]);
                         eventsAllObj.splice(x, 1);
-                        console.log(eventsObj[i].num);
+                        // console.log(eventsObj[i].num);
                         // $("#form-results-events").append('\
                         //     <p>name: ' + eventsObj[i].name + '</p>\
                         //     <p>artist: ' + eventsObj[i].artist + '</p>\
@@ -166,7 +155,7 @@ function apiSongKickRun() {
                             </div>\
                         ');
                     }
-                    console.log(eventsAllObj);
+                    // console.log(eventsAllObj);
                     console.log(eventsObj);
 
                 });
