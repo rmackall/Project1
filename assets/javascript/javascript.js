@@ -1,3 +1,5 @@
+// SongKick API Variables
+
 var apiSongKickKey = "6pZngLm7sG0kGF4U";
 var apiSongKickQuery;
 
@@ -10,6 +12,10 @@ var locationID;
 
 var eventsAllObj = [];
 var eventsObj = [];
+
+// YouTube Variables
+var headlineArtist;
+
 
 // Initial SongKick form - Date Picker
 var monthtext=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'];
@@ -45,25 +51,42 @@ window.onload=function(){
 }
 
 
-// Listeners
+        //// **** LISTENERS **** ////
+
+// Button - Run SongKick API based on City & Date
 $(document).on("click", "#form-run-songkick", function() {
     apiSongKickRun();
 });
 
-// SONGKICK API REQUEST - pulls event details and pushes into eventsAllObj array
+// Button - Load video of selected artist event
+$(document).on("click", ".button-load-video", function(event) {
+    event.preventDefault();
+    headlineArtist = $(this).attr("data-artist");
+    console.log("headline artist " + headlineArtist)
+    loadVideo();
+});
+
+
+        //// **** FUNCTIONS **** ////
+
+// ~~~ SONGKICK ~~~
+
+// API request - pull events based on location and date
 function apiSongKickRun() {
 
+    // Clear previous API search results
     eventsAllObj = [];
     eventsObj = [];
 
+    // New location is from input field
     apiSongKickQuery = $("#form-location-field").val();
   
+    // Run query based on location (e.g. Denver)
     var queryURL = "https://api.songkick.com/api/3.0/search/locations.json?query=" + apiSongKickQuery + "&apikey=" + apiSongKickKey;  // api query to identify location ID
-
-    // var queryURL = "https://api.songkick.com/api/3.0/metro_areas/6404/calendar.json?apikey=" + apiSongKickKey;
 
     console.log("queryURL is " + queryURL);
 
+    // 
     $.ajax({
       url: queryURL,
       method: "GET"
@@ -149,7 +172,7 @@ function apiSongKickRun() {
                                         <p class="card-text event-details">Start Date: ' + eventsObj[i].startdate + '</p>\
                                     </div>\
                                     <div class="card-footer">\
-                                        <a href="#" class="btn btn-primary button-load-video">Load Music Video</a>\
+                                        <a href="#" class="btn btn-primary button-load-video" data-artist="' + eventsObj[i].artist + '">Load Music Video</a>\
                                     </div>\
                                 </div>\
                             </div>\
@@ -169,6 +192,12 @@ function apiSongKickRun() {
 }
 
 
-function eventsChoices() {
 
+
+
+
+
+
+function loadVideo() {
+    // push 'headlineArtist' variable into Youtube API, autoplay video
 }
