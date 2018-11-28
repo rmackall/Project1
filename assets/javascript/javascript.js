@@ -1,25 +1,11 @@
-// SongKick API Variables
+                //// **** VARIABLES **** ////
+                
+    //// ~~~ SONGKICK ~~~ ////
 
-var apiSongKickKey = "6pZngLm7sG0kGF4U";
-var apiSongKickQuery;
-
-var locationCity;
-var locationState = "";
-var locationCountry;
-var locationLat;
-var locationLng;
-var locationID;
-
-var eventsAllObj = [];
-var eventsObj = [];
-
-// YouTube Variables
-var headlineArtist;
-
-
-// Initial SongKick form - Date Picker
+// Input form - date picker
 var monthtext=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'];
 
+// Input form - date picker
 function populatedropdown(dayfield, monthfield, yearfield) {
     var today=new Date()
     var dayfield=document.getElementById(dayfield)
@@ -41,19 +27,38 @@ function populatedropdown(dayfield, monthfield, yearfield) {
     yearfield.options[0]=new Option(today.getFullYear(), today.getFullYear(), true, true) //select today's year
 }
 
+// API key
+var apiSongKickKey = "6pZngLm7sG0kGF4U";
+var apiSongKickQuery;
+
+// Location details
+var locationCity;
+var locationState = "";
+var locationCountry;
+var locationLat;
+var locationLng;
+var locationID;
+
+// Events arrays
+var eventsAllObj = [];
+var eventsObj = [];
+
+
+    //// ~~~ YOUTUBE ~~~ ////
+
+// Single artist to input into YouTube API
+var headlineArtist;
+
+
+
+
+                //// **** LISTENERS **** ////
+
 // On load, populate date field and run initial songkick
 window.onload=function(){
     populatedropdown("daydropdown", "monthdropdown", "yeardropdown")
-    // setTimeout(function() {
-        apiSongKickRun();
-        console.log("ran apiSongKickRun");
-    // }, 2000);
+    apiSongKickRun();
 }
-
-
-
-
-        //// **** LISTENERS **** ////
 
 // Button to run SongKick API, using input City & Date
 $(document).on("click", "#form-run-songkick", function() {
@@ -70,9 +75,10 @@ $(document).on("click", ".button-load-video", function(event) {
 
 
 
-        //// **** FUNCTIONS **** ////
 
-//// ~~~ SONGKICK ~~~ ////
+                //// **** FUNCTIONS **** ////
+
+    //// ~~~ SONGKICK ~~~ ////
 
 // API FUNCTION - pull events based on location and date
 function apiSongKickRun() {
@@ -187,7 +193,6 @@ function apiSongKickRun() {
                 ');
             }
 
-
             // Prints all remaining events in eventsAllObj array
             // console.log(eventsAllObj);
             // Prints all events we've pushed to html
@@ -200,8 +205,7 @@ function apiSongKickRun() {
 }
 
 
-
-//// ~~~ YOUTUBE ~~~ ////
+    //// ~~~ YOUTUBE ~~~ ////
 
 // API FUNCTION - Get video based on headline artist
 function loadVideo() {
