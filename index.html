@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Project 1</title
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -28,7 +30,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
-        <a class="navbar-brand" href="#">Get Your Groove On</a>
+        <a class="navbar-brand" href="#">BranchOut</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -48,57 +50,49 @@
     </nav>
 
     <!-- Page Content -->
-   <div class="container"> 
+    <div class="container">
 
       <!-- Heading Row -->
-
-      <div id="header">
-        <a href="" id="logo">Branch Out</a>
-      </div>
-
       <div class="row my-4">
-        <div class="col-lg-8" id=">
-          <div id="searchBox">
-            <h1>Type something to search!</h1>
-            <input id="bandInput"/><button id="bandButton">Submit</button>
-            <div class="error">Please enter a value!</div>
-          </div>
-          
-          <div class="wrapper">  
-            <h1>Youtube</h1>
-            <div class="yt-wrapper">
-              <iframe src="" frameborder="0" allowfullscreen="" id="yt-player"></iframe>
-              <div id="yt-destination" class="yt-results"></div>
-              <script id="yt-template" type="text/x-handlebars-template">
-                {{#each items}}
-                <div data-video-id="{{ id.videoId }}" class="result">
-                  <img src="{{ snippet.thumbnails.medium.url }}" width="{{ snippet.thumbnails.medium.width }}" height="{{ snippet.thumbnails.medium.height }}"/>
-                  <h2>{{ snippet.title }}</h2>
-                  <p>{{ snippet.description }}</p>
-                </div>
-                {{/each}}
-              </script>
-            </div>
-          
-            <button id="restartSearch">Restart Search</button>
-          </div>
-
+        <div class="col-lg-8">
+          <img class="img-fluid rounded" src="http://placehold.it/900x400" alt="">
+        </div>
+        <!-- /.col-lg-8 -->
+        <div class="col-lg-4">
+          <h1>YouTube Playlist Will Be Shown Here</h1>
+          <p>It doesn't have too much fancy flare to it, but it makes a great use of the standard Bootstrap core components. Feel free to use this template for any project you want!</p>
+          <a class="btn btn-primary btn-lg" href="#">Search New Artists Here!</a>
+        </div>
+        <!-- /.col-md-4 -->
+      </div>
+      <!-- /.row -->
+      
       
       <form>
         <div>
           <label for="form-location-field">Location:</label>
           <input type="text" id="form-location-field" name="form-enter-location" placeholder="Enter A Location" value="Denver">
           <!-- <button type="button" id="form-location-use-current-btn">Use My Current Location</button> -->
-          <span>Date:</span>
-                <form action="" name="someform">
-                        <select id="daydropdown">
-                        </select> 
-                        <select id="monthdropdown">
-                        </select> 
-                        <select id="yeardropdown">
-                        </select> 
-                        </form>
-                        <span><button type="button" id="form-run-songkick">Run SongKick API</button></span>
+          <br>
+          <span>From:
+            <form action="" name="someform">
+              <select id="daydropdownfrom">
+              </select> 
+              <select id="monthdropdownfrom">
+              </select> 
+              <select id="yeardropdownfrom">
+              </select> 
+          To:
+            <form action="" name="someform">
+              <select id="daydropdownto">
+              </select> 
+              <select id="monthdropdownto">
+              </select> 
+              <select id="yeardropdownto">
+              </select> 
+            </form>
+          </span>
+          <span><button type="button" id="form-run-songkick">Run SongKick API</button></span>
         </div>
     </form>
 
@@ -179,7 +173,7 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script type='text/javascript' src="handlebars-v4.0.12.js"></script>
+
   </body>
 
 </html>

@@ -2,11 +2,11 @@
                 
     //// ~~~ SONGKICK ~~~ ////
 
-// Input form - date picker
+// Input form - date picker month array
 var monthtext=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'];
 
-// Input form - date picker
-function populatedropdown(dayfield, monthfield, yearfield) {
+// Input form - date picker from
+function populatedropdownfrom(dayfield, monthfield, yearfield) {
     var today=new Date()
     var dayfield=document.getElementById(dayfield)
     var monthfield=document.getElementById(monthfield)
@@ -25,6 +25,29 @@ function populatedropdown(dayfield, monthfield, yearfield) {
         thisyear+=1
     }
     yearfield.options[0]=new Option(today.getFullYear(), today.getFullYear(), true, true) //select today's year
+}
+
+// Input form - date picker to
+function populatedropdownto(dayfield, monthfield, yearfield) {
+    var today=new Date();
+    var dayfield=document.getElementById(dayfield)
+    var monthfield=document.getElementById(monthfield)
+    var yearfield=document.getElementById(yearfield)
+    for (var i=0; i<31; i++) {
+        dayfield.options[i]=new Option(i, i+1)
+        dayfield.options[today.getDate()]=new Option(today.getDate(), today.getDate(), true, true) //select today's day
+    }
+    for (var m=0; m<12; m++) {
+        monthfield.options[m]=new Option(monthtext[m], monthtext[m])
+        monthfield.options[today.getMonth()]=new Option(monthtext[today.getMonth()], monthtext[today.getMonth()], true, true) //select today's month
+    }
+    var thisyear=today.getFullYear()
+    for (var y=0; y<20; y++){
+        yearfield.options[y]=new Option(thisyear, thisyear)
+        thisyear+=1
+    }
+    yearfield.options[0]=new Option(today.getFullYear(), today.getFullYear(), true, true) //select today's year
+    console.log("to date is " + today);
 }
 
 // API key
@@ -56,7 +79,8 @@ var headlineArtist;
 
 // On load, populate date field and run initial songkick
 window.onload=function(){
-    populatedropdown("daydropdown", "monthdropdown", "yeardropdown")
+    populatedropdownfrom("daydropdownfrom", "monthdropdownfrom", "yeardropdownfrom")
+    populatedropdownto("daydropdownto", "monthdropdownto", "yeardropdownto")
     apiSongKickRun();
 }
 
@@ -69,7 +93,8 @@ $(document).on("click", "#form-run-songkick", function() {
 $(document).on("click", ".button-load-video", function(event) {
     event.preventDefault();
     headlineArtist = $(this).attr("data-artist");
-    console.log("headline artist " + headlineArtist)
+    console.log("headline artist " + headlineArtist);
+    console.log("running loadVideo()");
     loadVideo();
 });
 
@@ -181,7 +206,6 @@ function apiSongKickRun() {
                         <div class="card h-100">\
                             <div class="card-body">\
                                 <h2 class="card-title event-name">' + eventName + '</h2>\
-                                <p class="card-text event-details">Headlining Artist: ' + eventsObj[i].artist + '</p>\
                                 <p class="card-text event-details">Venue: ' + eventsObj[i].venue + '</p>\
                                 <p class="card-text event-details">Start Date: ' + eventsObj[i].startdate + '</p>\
                             </div>\
@@ -207,121 +231,7 @@ function apiSongKickRun() {
 
     //// ~~~ YOUTUBE ~~~ ////
 
-
 // API FUNCTION - Get video based on headline artist
 function loadVideo() {
     // use variable 'headlineArtist' and Youtube API to get video and autoplay
 }
-
-}
-
-$(window).on('load', function() {
-window.searchModule = {
-
-  cors: "http://crossorigin.me/",
-  ytEndpoint: "https://www.googleapis.com/youtube/v3/search",
-  ytKey: "AIzaSyCB__3Jht7AQDhI-LHyuvdh9xO0Q2CnA2c",
-
-  init: function(sentSearch) {
-    var self = this,
-        bandCheck = $("#bandCheckbox").is(":checked");
-    
-    if(bandCheck == true) {
-      sentSearch = sentSearch + "+(band)";
-    }
-    
-    self.ytSearch(sentSearch);
-    self.watchers();
-  },
-
-
-  ytSearch: function(sentSearch) {
-    var self = this;
-
-    $.ajax({
-      url: self.ytEndpoint + "?part=snippet&q=" + sentSearch + "&key=" + self.ytKey,
-      success: function(response) {
-        //console.log(response);
-        self.formatYt(response);
-      },
-
-      error: function(response) {
-        console.log(response);
-      }
-    })
-  },
-
-  formatYt: function(response) {
-    var self = this,
-        source = $("#yt-template").html(),
-        template = Handlebars.compile(source),
-        destination = $("#yt-destination"),
-        newResponse = {items : []};
-
-    //filter out youtube channels
-    //only show videos
-    $.each(response.items, function(i, item) {          
-      if(item.id.kind == "youtube#video") {
-        newResponse.items.push(item);
-      }
-    })
-
-    $("#yt-player").attr("src", "https://www.youtube.com/embed/" + newResponse.items[0].id.videoId);
-
-    destination.html(template(newResponse));
-    self.changeYtVideo();
-    $(".wrapper").show();
-  },
-
-  changeYtVideo: function() {
-
-    $(".yt-wrapper .result").click(function() {
-      var newVideoId = $(this).attr("data-video-id");
-      $("#yt-player").attr("src", "https://www.youtube.com/embed/" + newVideoId);
-
-    })
-  },
-
-  watchers: function() {
-    var self = this;
-
-    $("#bandButton").click(function() {
-      self.start();
-    })
-
-    $("#bandInput").keyup(function(e) {    
-      if(e.keyCode === 13) {
-        self.start();
-      }
-    });
-
-    $("#restartSearch").click(function() {
-      $("#bandInput").val("");
-      $("#bandCheckbox").attr("checked", false);
-      $("#yt-player").attr("src", "");
-      $(".searchBox").show();
-      $(".wrapper").hide();
-    })
-  },
-
-  start: function() {
-    var inputVal = $("#bandInput").val();
-
-    if(inputVal === "undefined" || inputVal === "") {
-      $(".error").show();
-
-    } else {
-      //console.log(inputVal);
-      $(".error").hide();
-      $(".searchBox").hide();
-      window.searchModule.init(inputVal);
-    }
-  }
-
-}
-
-$(function() {
-  window.searchModule.watchers();
-});
-});
-
