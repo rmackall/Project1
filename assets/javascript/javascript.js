@@ -41,8 +41,6 @@ window.onload=function(){
 }
 
 
-
-
 // Location Field
 // $("#form-location-use-current-btn").click(function () {
 //     if (apiSongKickQuery != "clientip") {
@@ -139,12 +137,13 @@ function apiSongKickRun() {
                         console.log("x is " + x);
                         eventsObj.push(eventsAllObj[x]);
                         eventsAllObj.splice(x, 1);
+                        console.log(eventsObj[i].num);
                         $("#form-results-events").append('\
-                            <p>num: ' + eventsObj[i].num + '</p>\
                             <p>name: ' + eventsObj[i].name + '</p>\
                             <p>artist: ' + eventsObj[i].artist + '</p>\
                             <p>venue: ' + eventsObj[i].venue + '</p>\
                             <p>startdate: ' + eventsObj[i].startdate + '</p>\
+                            <button type="button" id="watchvideo">Watch A Video</button>\
                             <br>\
                         ');
                     }
