@@ -50,22 +50,36 @@
     </nav>
 
     <!-- Page Content -->
-    <div class="container">
+   <div class="container"> 
 
       <!-- Heading Row -->
       <div class="row my-4">
-        <div class="col-lg-8">
-          <img class="img-fluid rounded" src="http://placehold.it/900x400" alt="">
-        </div>
-        <!-- /.col-lg-8 -->
-        <div class="col-lg-4">
-          <h1>YouTube Playlist Will Be Shown Here</h1>
-          <p>It doesn't have too much fancy flare to it, but it makes a great use of the standard Bootstrap core components. Feel free to use this template for any project you want!</p>
-          <a class="btn btn-primary btn-lg" href="#">Search New Artists Here!</a>
-        </div>
-        <!-- /.col-md-4 -->
-      </div>
-      <!-- /.row -->
+        <div class="col-lg-8" id=">
+          <div class="searchBox">
+            <h1>Type something to search!</h1>
+            <input id="bandInput"/><button id="bandButton">Submit</button>
+            <div class="error">Please enter a value!</div>
+          </div>
+          
+          <div class="wrapper">  
+            <h1>Youtube</h1>
+            <div class="yt-wrapper">
+              <iframe src="" frameborder="0" allowfullscreen="" id="yt-player"></iframe>
+              <div id="yt-destination" class="yt-results"></div>
+              <script id="yt-template" type="text/x-handlebars-template">
+                {{#each items}}
+                <div data-video-id="{{ id.videoId }}" class="result">
+                  <img src="{{ snippet.thumbnails.medium.url }}" width="{{ snippet.thumbnails.medium.width }}" height="{{ snippet.thumbnails.medium.height }}"/>
+                  <h2>{{ snippet.title }}</h2>
+                  <p>{{ snippet.description }}</p>
+                </div>
+                {{/each}}
+              </script>
+            </div>
+          
+            <button id="restartSearch">Restart Search</button>
+          </div>
+
       
       
       <form>
@@ -166,7 +180,7 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+    <script type='text/javascript' src="handlebars-v4.0.12.js"></script>
   </body>
 
 </html>
