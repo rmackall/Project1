@@ -165,3 +165,113 @@ function apiSongKickRun() {
 function eventsChoices() {
 
 }
+
+$(window).on('load', function() {
+window.searchModule = {
+
+  cors: "http://crossorigin.me/",
+  ytEndpoint: "https://www.googleapis.com/youtube/v3/search",
+  ytKey: "AIzaSyCB__3Jht7AQDhI-LHyuvdh9xO0Q2CnA2c",
+
+  init: function(sentSearch) {
+    var self = this,
+        bandCheck = $("#bandCheckbox").is(":checked");
+    
+    if(bandCheck == true) {
+      sentSearch = sentSearch + "+(band)";
+    }
+    
+    self.ytSearch(sentSearch);
+    self.watchers();
+  },
+
+
+  ytSearch: function(sentSearch) {
+    var self = this;
+
+    $.ajax({
+      url: self.ytEndpoint + "?part=snippet&q=" + sentSearch + "&key=" + self.ytKey,
+      success: function(response) {
+        //console.log(response);
+        self.formatYt(response);
+      },
+
+      error: function(response) {
+        console.log(response);
+      }
+    })
+  },
+
+  formatYt: function(response) {
+    var self = this,
+        source = $("#yt-template").html(),
+        template = Handlebars.compile(source),
+        destination = $("#yt-destination"),
+        newResponse = {items : []};
+
+    //filter out youtube channels
+    //only show videos
+    $.each(response.items, function(i, item) {          
+      if(item.id.kind == "youtube#video") {
+        newResponse.items.push(item);
+      }
+    })
+
+    $("#yt-player").attr("src", "https://www.youtube.com/embed/" + newResponse.items[0].id.videoId);
+
+    destination.html(template(newResponse));
+    self.changeYtVideo();
+    $(".wrapper").show();
+  },
+
+  changeYtVideo: function() {
+
+    $(".yt-wrapper .result").click(function() {
+      var newVideoId = $(this).attr("data-video-id");
+      $("#yt-player").attr("src", "https://www.youtube.com/embed/" + newVideoId);
+
+    })
+  },
+
+  watchers: function() {
+    var self = this;
+
+    $("#bandButton").click(function() {
+      self.start();
+    })
+
+    $("#bandInput").keyup(function(e) {    
+      if(e.keyCode === 13) {
+        self.start();
+      }
+    });
+
+    $("#restartSearch").click(function() {
+      $("#bandInput").val("");
+      $("#bandCheckbox").attr("checked", false);
+      $("#yt-player").attr("src", "");
+      $(".searchBox").show();
+      $(".wrapper").hide();
+    })
+  },
+
+  start: function() {
+    var inputVal = $("#bandInput").val();
+
+    if(inputVal === "undefined" || inputVal === "") {
+      $(".error").show();
+
+    } else {
+      //console.log(inputVal);
+      $(".error").hide();
+      $(".searchBox").hide();
+      window.searchModule.init(inputVal);
+    }
+  }
+
+}
+
+$(function() {
+  window.searchModule.watchers();
+});
+});
