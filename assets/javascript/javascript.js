@@ -147,11 +147,14 @@ function apiSongKickRun() {
                         //     <br>\
                         // ');
 
+
+                    var eventName = eventsObj[i].name.substring(0, eventsObj[i].name.indexOf(' at '));
+
                         $("#form-results-events").append('\
                             <div class="col-md-4 mb-4">\
                                 <div class="card h-100">\
                                     <div class="card-body">\
-                                        <h2 class="card-title event-name">' + eventsObj[i].name + '</h2>\
+                                        <h2 class="card-title event-name">' + eventName + '</h2>\
                                         <p class="card-text event-details">Headlining Artist: ' + eventsObj[i].artist + '</p>\
                                         <p class="card-text event-details">Venue: ' + eventsObj[i].venue + '</p>\
                                         <p class="card-text event-details">Start Date: ' + eventsObj[i].startdate + '</p>\
