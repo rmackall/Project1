@@ -138,13 +138,29 @@ function apiSongKickRun() {
                         eventsObj.push(eventsAllObj[x]);
                         eventsAllObj.splice(x, 1);
                         console.log(eventsObj[i].num);
+                        // $("#form-results-events").append('\
+                        //     <p>name: ' + eventsObj[i].name + '</p>\
+                        //     <p>artist: ' + eventsObj[i].artist + '</p>\
+                        //     <p>venue: ' + eventsObj[i].venue + '</p>\
+                        //     <p>startdate: ' + eventsObj[i].startdate + '</p>\
+                        //     <button type="button" id="watchvideo">Watch A Video</button>\
+                        //     <br>\
+                        // ');
+
                         $("#form-results-events").append('\
-                            <p>name: ' + eventsObj[i].name + '</p>\
-                            <p>artist: ' + eventsObj[i].artist + '</p>\
-                            <p>venue: ' + eventsObj[i].venue + '</p>\
-                            <p>startdate: ' + eventsObj[i].startdate + '</p>\
-                            <button type="button" id="watchvideo">Watch A Video</button>\
-                            <br>\
+                            <div class="col-md-4 mb-4">\
+                                <div class="card h-100">\
+                                    <div class="card-body">\
+                                        <h2 class="card-title event-name">' + eventsObj[i].name + '</h2>\
+                                        <p class="card-text event-details">Headlining Artist: ' + eventsObj[i].artist + '</p>\
+                                        <p class="card-text event-details">Venue: ' + eventsObj[i].venue + '</p>\
+                                        <p class="card-text event-details">Start Date: ' + eventsObj[i].startdate + '</p>\
+                                    </div>\
+                                    <div class="card-footer">\
+                                        <a href="#" class="btn btn-primary button-load-video">Load Music Video</a>\
+                                    </div>\
+                                </div>\
+                            </div>\
                         ');
                     }
                     console.log(eventsAllObj);
