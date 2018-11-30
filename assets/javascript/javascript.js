@@ -208,9 +208,12 @@ function topFunction() {
 $(document).on("click", ".button-load-video", function(event) {
     event.preventDefault();
     headlineArtist = $(this).attr("data-artist");
+<<<<<<< HEAD
     $("#bandInput").val(headlineArtist);
     $("#bandButton").click();
     topFunction(); 
+=======
+>>>>>>> master
     console.log("headline artist " + headlineArtist);
     console.log("running loadVideo()");
     loadVideo();
@@ -353,6 +356,7 @@ function apiSongKickRun() {
     //// ~~~ YOUTUBE ~~~ ////
 
 // API FUNCTION - Get video based on headline artist
+<<<<<<< HEAD
 
     // use variable 'headlineArtist' and Youtube API to get video and autoplay
 
@@ -360,3 +364,8 @@ function apiSongKickRun() {
     
   
     
+=======
+function loadVideo() {
+    // use variable 'headlineArtist' and Youtube API to get video and autoplay
+}
+>>>>>>> master
