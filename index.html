@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<<<<<<< HEAD
+    <title>Project 1</title>
+=======
     <title>Project 1</title
+>>>>>>> master
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -50,6 +54,36 @@
     </nav>
 
     <!-- Page Content -->
+<<<<<<< HEAD
+    <div class="container"> 
+
+        <!-- Heading Row -->
+        <div class="row my-4">
+          <div class="col-lg-8" id="">
+            <div class="searchBox">
+              <h1>Type something to search!</h1>
+              <input id="bandInput"/><button id="bandButton">Submit</button>
+              <div class="error">Please enter a value!</div>
+            </div>
+            
+            <div class="wrapper">  
+              <h1></h1>
+              <div class="yt-wrapper">
+                <iframe src="" frameborder="0" allowfullscreen="" id="yt-player" width="600" height="400"></iframe>
+                <div id="yt-destination" class="yt-results"></div>
+                <script id="yt-template" type="text/x-handlebars-template">
+                  {{#each items}}
+                  <div data-video-id="{{ id.videoId }}" class="result">
+                    <img src="{{ snippet.thumbnails.medium.url }}" width="{{ snippet.thumbnails.medium.width }}" height="{{ snippet.thumbnails.medium.height }}"/>
+                    <h2>{{ snippet.title }}</h2>
+                    <p>{{ snippet.description }}</p>
+                  </div>
+                  {{/each}}
+                </script>
+              </div>
+                    </div>
+  
+=======
     <div class="container">
 
       <!-- Heading Row -->
@@ -63,6 +97,7 @@
           <p>It doesn't have too much fancy flare to it, but it makes a great use of the standard Bootstrap core components. Feel free to use this template for any project you want!</p>
           <a class="btn btn-primary btn-lg" href="#">Search New Artists Here!</a>
         </div>
+>>>>>>> master
         <!-- /.col-md-4 -->
       </div>
       <!-- /.row -->
@@ -167,10 +202,11 @@
     <!-- JQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- Javascript  Javascript -->
-    <script type="text/javascript" src="assets/javascript/javascript.js"></script>
+    <script type="text/javascript" src="davejavascript.js"></script>
     <!-- Bootstrap core JavaScript -->
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="handlebars-v4.0.12.js"></script>
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 

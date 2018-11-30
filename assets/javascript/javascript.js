@@ -1,3 +1,115 @@
+$(window).on('load', function() {
+window.searchModule = {
+
+  cors: "http://crossorigin.me/",
+  ytEndpoint: "https://www.googleapis.com/youtube/v3/search",
+  ytKey: "AIzaSyCB__3Jht7AQDhI-LHyuvdh9xO0Q2CnA2c",
+
+  init: function(sentSearch) {
+    var self = this,
+        bandCheck = $("#bandCheckbox").is(":checked");
+    
+    if(bandCheck == true) {
+      sentSearch = sentSearch + "+(band)";
+    }
+    
+    self.ytSearch(sentSearch);
+    self.watchers();
+  },
+
+
+  ytSearch: function(sentSearch) {
+    var self = this;
+
+    $.ajax({
+      url: self.ytEndpoint + "?part=snippet&q=" + sentSearch + "&key=" + self.ytKey,
+      success: function(response) {
+        //console.log(response);
+        self.formatYt(response);
+      },
+
+      error: function(response) {
+        console.log(response);
+      }
+    })
+  },
+
+
+  formatYt: function(response) {
+    var self = this,
+        source = $("#yt-template").html(),
+        template = Handlebars.compile(source),
+        destination = $("#yt-destination"),
+        newResponse = {items : []};
+
+    //filter out youtube channels
+    //only show videos
+    $.each(response.items, function(i, item) {          
+      if(item.id.kind == "youtube#video") {
+        newResponse.items.push(item);
+      }
+    })
+
+    $("#yt-player").attr("src", "https://www.youtube.com/embed/" + newResponse.items[0].id.videoId);
+
+    destination.html(template(newResponse));
+    self.changeYtVideo();
+    $(".wrapper").show();
+  },
+
+  changeYtVideo: function() {
+
+    $(".yt-wrapper .result").click(function() {
+      var newVideoId = $(this).attr("data-video-id");
+      $("#yt-player").attr("src", "https://www.youtube.com/embed/" + newVideoId);
+
+    })
+  },
+
+  watchers: function() {
+    var self = this;
+
+    $("#bandButton").click(function() {
+      self.start();
+    })
+
+    $("#bandInput").keyup(function(e) {    
+      if(e.keyCode === 13) {
+        self.start();
+      }
+    });
+
+    $("#restartSearch").click(function() {
+      $("#bandInput").val("");
+      $("#bandCheckbox").attr("checked", false);
+      $("#yt-player").attr("src", "");
+      $(".searchBox").show();
+      $(".wrapper").hide();
+    })
+  },
+
+  start: function() {
+    var inputVal = $("#bandInput").val();
+
+    if(inputVal === "undefined" || inputVal === "") {
+      $(".error").show();
+
+    } else {
+      //console.log(inputVal);
+      $(".error").hide();
+      $(".searchBox").hide();
+      window.searchModule.init(inputVal);
+    }
+  }
+
+}
+
+$(function() {
+  window.searchModule.watchers();
+});
+});
+
+
                 //// **** VARIABLES **** ////
                 
     //// ~~~ SONGKICK ~~~ ////
@@ -88,15 +200,26 @@ window.onload=function(){
 $(document).on("click", "#form-run-songkick", function() {
     apiSongKickRun();
 });
-
+function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+}
 // Button to load artist video of selected event
 $(document).on("click", ".button-load-video", function(event) {
     event.preventDefault();
     headlineArtist = $(this).attr("data-artist");
+<<<<<<< HEAD
+    $("#bandInput").val(headlineArtist);
+    $("#bandButton").click();
+    topFunction(); 
+=======
+>>>>>>> master
     console.log("headline artist " + headlineArtist);
     console.log("running loadVideo()");
     loadVideo();
 });
+
+
 
 
 
@@ -210,7 +333,7 @@ function apiSongKickRun() {
                                 <p class="card-text event-details">Start Date: ' + eventsObj[i].startdate + '</p>\
                             </div>\
                             <div class="card-footer">\
-                                <a href="#" class="btn btn-primary button-load-video" data-artist="' + eventsObj[i].artist + '">Load Music Video</a>\
+                                <a href="#" class="btn btn-primary button-load-video" id="youtubeInputSearch" data-artist="' + eventsObj[i].artist + '">Load Music Video</a>\
                             </div>\
                         </div>\
                     </div>\
@@ -227,11 +350,22 @@ function apiSongKickRun() {
     });
 
 }
+      $(".searchBox").hide();
 
 
     //// ~~~ YOUTUBE ~~~ ////
 
 // API FUNCTION - Get video based on headline artist
+<<<<<<< HEAD
+
+    // use variable 'headlineArtist' and Youtube API to get video and autoplay
+
+    
+    
+  
+    
+=======
 function loadVideo() {
     // use variable 'headlineArtist' and Youtube API to get video and autoplay
 }
+>>>>>>> master
