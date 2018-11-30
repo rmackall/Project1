@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Project 1</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -35,6 +35,7 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
+          <!-- <marquee behavior="scroll" direction="left">HTML scrolling text... </marquee> -->
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
               <a class="nav-link" href="#">Home
@@ -50,114 +51,63 @@
     </nav>
 
     <!-- Page Content -->
-    <div class="container">
+    <div class="container wrapper">
 
       <!-- Heading Row -->
       <div class="row my-4">
         <div class="col-lg-8">
-          <img class="img-fluid rounded" src="http://placehold.it/900x400" alt="">
+          <img class="img-fluid rounded" id="vidph-pic" src="assets/images/vidph1.jpg" alt="">
         </div>
         <!-- /.col-lg-8 -->
         <div class="col-lg-4">
-          <h1>YouTube Playlist Will Be Shown Here</h1>
-          <p>It doesn't have too much fancy flare to it, but it makes a great use of the standard Bootstrap core components. Feel free to use this template for any project you want!</p>
-          <a class="btn btn-primary btn-lg" href="#">Search New Artists Here!</a>
+          <p>Enter your location and browse artists playing in your area.  Discover someone new and support live music.</p>
+          <form>
+              <div>
+                <label for="form-location-field">Location:</label>
+                <input class="search-form" type="text" id="form-location-field" name="form-enter-location" placeholder="Enter A Location" value="Denver">
+                <!-- <button type="button" id="form-location-use-current-btn">Use My Current Location</button> -->
+                <div class="search-form">
+                From:
+                  <form action="" name="someform">
+                    <select id="daydropdownfrom">
+                    </select> 
+                    <select id="monthdropdownfrom">
+                    </select> 
+                    <select id="yeardropdownfrom">
+                    </select> 
+                  </div>
+                    <div class="search-form">
+                To:
+                  <form action="" name="someform">
+                    <select id="daydropdownto">
+                    </select> 
+                    <select id="monthdropdownto">
+                    </select> 
+                    <select id="yeardropdownto">
+                    </select> 
+                  </form>
+                </div>
+                
+                <span><button type="button" class="btn btn-primary btn-md" id="form-run-songkick">Run SongKick API</button></span>
+              </div>
+            <a class="btn btn-primary btn-md" id="form-results-location" href="#">Your City</a>
+          </form>
         </div>
         <!-- /.col-md-4 -->
       </div>
       <!-- /.row -->
       
       
-      <form>
-        <div>
-          <label for="form-location-field">Location:</label>
-          <input type="text" id="form-location-field" name="form-enter-location" placeholder="Enter A Location" value="Denver">
-          <!-- <button type="button" id="form-location-use-current-btn">Use My Current Location</button> -->
-          <br>
-          <span>From:
-            <form action="" name="someform">
-              <select id="daydropdownfrom">
-              </select> 
-              <select id="monthdropdownfrom">
-              </select> 
-              <select id="yeardropdownfrom">
-              </select> 
-          To:
-            <form action="" name="someform">
-              <select id="daydropdownto">
-              </select> 
-              <select id="monthdropdownto">
-              </select> 
-              <select id="yeardropdownto">
-              </select> 
-            </form>
-          </span>
-          <span><button type="button" id="form-run-songkick">Run SongKick API</button></span>
-        </div>
-    </form>
-
+      
     
-    
-    <div id="form-results-location"></div>
     <div class="row" id="form-results-events"></div>
-    
-    
-
-      <!-- Call to Action Well -->
-      <div class="card text-white bg-secondary my-4 text-center">
-        <div class="card-body">
-          <p class="text-white m-0">This call to action card is a great place to showcase some important information or display a clever tagline!</p>
-        </div>
-      </div>
-
-    <!-- Content Row -->
-    <div class="row">
-        <div class="col-md-4 mb-4">
-          <div class="card h-100">
-            <div class="card-body">
-              <h2 class="card-title event-name">Event-Name</h2>
-              <p class="card-text event-details">Event-Details</p>
-            </div>
-            <div class="card-footer">
-              <a href="#" class="btn btn-primary button-load-video">Load Video</a>
-            </div>
-          </div>
-        </div>
-        <!-- /.col-md-4 -->
-        <div class="col-md-4 mb-4">
-          <div class="card h-100">
-            <div class="card-body">
-              <h2 class="card-title">Shows Will Show Here</h2>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod tenetur ex natus at dolorem enim! Nesciunt pariatur voluptatem sunt quam eaque, vel, non in id dolore voluptates quos eligendi labore.</p>
-            </div>
-            <div class="card-footer">
-              <a href="#" class="btn btn-primary">More Info</a>
-            </div>
-          </div>
-        </div>
-        <!-- /.col-md-4 -->
-        <div class="col-md-4 mb-4">
-          <div class="card h-100">
-            <div class="card-body">
-              <h2 class="card-title">Map API Here</h2>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex numquam, maxime minus quam molestias corporis quod, ea minima accusamus.</p>
-            </div>
-            <div class="card-footer">
-              <a href="#" class="btn btn-primary">More Info</a>
-            </div>
-          </div>
-        </div>
-        <!-- /.col-md-4 -->
-
-      </div>
-      <!-- /.row -->
 
     </div>
     <!-- /.container -->
 
     <!-- Footer -->
-    <footer class="py-5 bg-dark">
-      <div class="container">
+    <footer class="py-2 bg-dark footer">
+      <div class="container"></div>
         <p class="m-0 text-center text-white">Copyright &copy; BranchOut 2018</p>
       </div>
       <!-- /.container -->
