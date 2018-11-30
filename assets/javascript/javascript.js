@@ -111,7 +111,21 @@ $(function() {
 
 
                 //// **** VARIABLES **** ////
-                
+
+    //// ~~~ DOM HTML ~~~ ////
+
+var imagesObj = [
+    'assets/images/vidph1.jpg',
+    'assets/images/vidph2.jpg',
+    'assets/images/vidph3.jpg',
+    'assets/images/vidph4.jpg',
+    'assets/images/vidph5.jpg',
+    'assets/images/vidph6.jpg',
+];
+
+var randImg = imagesObj[Math.floor(Math.random() * imagesObj.length)];
+$("#vidph-pic").attr("src", randImg);
+
     //// ~~~ SONGKICK ~~~ ////
 
 // Input form - date picker month array
@@ -184,9 +198,6 @@ var eventsObj = [];
 // Single artist to input into YouTube API
 var headlineArtist;
 
-
-
-
                 //// **** LISTENERS **** ////
 
 // On load, populate date field and run initial songkick
@@ -208,18 +219,15 @@ function topFunction() {
 $(document).on("click", ".button-load-video", function(event) {
     event.preventDefault();
     headlineArtist = $(this).attr("data-artist");
-<<<<<<< HEAD
+
     $("#bandInput").val(headlineArtist);
     $("#bandButton").click();
     topFunction(); 
-=======
->>>>>>> master
+
     console.log("headline artist " + headlineArtist);
     console.log("running loadVideo()");
-    loadVideo();
+    loadVideo(headlineArtist);
 });
-
-
 
 
 
@@ -353,19 +361,4 @@ function apiSongKickRun() {
       $(".searchBox").hide();
 
 
-    //// ~~~ YOUTUBE ~~~ ////
-
-// API FUNCTION - Get video based on headline artist
-<<<<<<< HEAD
-
-    // use variable 'headlineArtist' and Youtube API to get video and autoplay
-
-    
-    
-  
-    
-=======
-function loadVideo() {
-    // use variable 'headlineArtist' and Youtube API to get video and autoplay
-}
->>>>>>> master
+ 
