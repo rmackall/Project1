@@ -220,7 +220,7 @@ $(document).on("click", ".button-load-video", function(event) {
     event.preventDefault();
     headlineArtist = $(this).attr("data-artist");
 
-    $("#bandInput").val(headlineArtist);
+    $("#bandInput").val(headlineArtist + " artist");
     $("#bandButton").click();
     topFunction(); 
 
