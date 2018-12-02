@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Project 1</title>
+    <title>BranchOut - Git Out There</title>
 
 
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+    <!-- <meta name="description" content="">
+    <meta name="author" content=""> -->
 
     <title>Project1 - BranchOut</title>
 
@@ -56,15 +56,17 @@
 
     <!-- Page Content -->
 
-    <div class="container wrapper">
+    <div class="container wrapper" id="content-wrapper">
 
       <!-- Heading Row -->
       <div class="row my-4">
         <div class="col-lg-8">
-          <img class="img-fluid rounded" id="vidph-pic" src="assets/images/vidph1.jpg" alt="">
+          <div id="vidph">
+            <img class="img-fluid rounded" id="vidph-pic" src="assets/images/vidph1.jpg" alt="">
+          </div>
         </div>
         <!-- /.col-lg-8 -->
-        <div class="col-lg-4">
+        <div class="col-lg-4 msrep">
           <p>Enter your location and browse artists playing in your area.  Discover someone new and support live music.</p>
           <form>
               <div>
@@ -93,13 +95,15 @@
                   </form>
                 </div>
                 
-                <span><button type="button" class="btn btn-primary btn-md" id="form-run-songkick">Run SongKick API</button></span>
+                <span><button type="button" class="btn btn-primary btn-md" id="form-run-songkick">Run SongKick API Search</button></span><br>
+                <span><button type="button" class="btn btn-primary btn-md" id="yt-btn-prev" style="display: none">Previous Video</button></span>
+                <span><button type="button" class="btn btn-primary btn-md" id="yt-btn-next" style="display: none">Next Video</button></span>
               </div>
-            <a class="btn btn-primary btn-md" id="form-results-location" href="#">Your City</a>
+            <span>Results for: </span><span id="form-results-location">Your City</span>
           </form>
         </div>
 
-    <div class="container"> 
+    <div class="container msrep"> 
 
         <!-- Heading Row -->
         <div class="row my-4">
@@ -154,7 +158,7 @@
     <!-- JQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- Javascript  Javascript -->
-    <script type="text/javascript" src="davejavascript.js"></script>
+    <script type="text/javascript" src="assets/javascript/javascript.js"></script>
     <!-- Bootstrap core JavaScript -->
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>

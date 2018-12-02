@@ -1,3 +1,6 @@
+
+
+
 $(window).on('load', function() {
 window.searchModule = {
 
@@ -50,21 +53,35 @@ window.searchModule = {
       }
     })
 
+    videoIDsObj = [];
+
+    for (i = 0; i < newResponse.items.length; i++) {
+        videoIDsObj.push(newResponse.items[i].id.videoId);
+        console.log(videoIDsObj[i]);
+    }
+
+    // dave
+    $("#vidph").html('\
+    <iframe src="" frameborder="0" allowfullscreen="" id="yt-player" width="100%" height="100%" data-vidid="' + newResponse.items[0].id.videoId + '"></iframe>\
+    <br>\
+    \
+    ');
+
     $("#yt-player").attr("src", "https://www.youtube.com/embed/" + newResponse.items[0].id.videoId);
 
-    destination.html(template(newResponse));
-    self.changeYtVideo();
-    $(".wrapper").show();
+    // destination.html(template(newResponse));
+    // self.changeYtVideo();
+    // $(".wrapper").show();
   },
 
-  changeYtVideo: function() {
+//   changeYtVideo: function() {
 
-    $(".yt-wrapper .result").click(function() {
-      var newVideoId = $(this).attr("data-video-id");
-      $("#yt-player").attr("src", "https://www.youtube.com/embed/" + newVideoId);
+//     $(".yt-wrapper .result").click(function() {
+//       var newVideoId = $(this).attr("data-video-id");
+//       $("#yt-player").attr("src", "https://www.youtube.com/embed/" + newVideoId);
 
-    })
-  },
+//     })
+//   },
 
   watchers: function() {
     var self = this;
@@ -161,7 +178,7 @@ function populatedropdownto(dayfield, monthfield, yearfield) {
     var yearfield=document.getElementById(yearfield)
     for (var i=0; i<31; i++) {
         dayfield.options[i]=new Option(i, i+1)
-        dayfield.options[today.getDate()]=new Option(today.getDate(), today.getDate(), true, true) //select today's day
+        dayfield.options[today.getDate()]=new Option(today.getDate() + 1, today.getDate() + 1, true, true) //select today's day
     }
     for (var m=0; m<12; m++) {
         monthfield.options[m]=new Option(monthtext[m], monthtext[m])
@@ -198,6 +215,8 @@ var eventsObj = [];
 // Single artist to input into YouTube API
 var headlineArtist;
 
+var videoIDsObj = [];
+
                 //// **** LISTENERS **** ////
 
 // On load, populate date field and run initial songkick
@@ -211,6 +230,7 @@ window.onload=function(){
 $(document).on("click", "#form-run-songkick", function() {
     apiSongKickRun();
 });
+
 function topFunction() {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
@@ -220,13 +240,67 @@ $(document).on("click", ".button-load-video", function(event) {
     event.preventDefault();
     headlineArtist = $(this).attr("data-artist");
 
-    $("#bandInput").val(headlineArtist + " artist");
+    $("#bandInput").val('"' + headlineArtist + '" music');
     $("#bandButton").click();
     topFunction(); 
+    $("#yt-btn-next").show();
 
-    console.log("headline artist " + headlineArtist);
-    console.log("running loadVideo()");
-    loadVideo(headlineArtist);
+    console.log("headline music " + headlineArtist);
+    // console.log("running loadVideo()");
+    // loadVideo(headlineArtist);
+
+});
+
+// Button to run SongKick API, using input City & Date
+$(document).on("click", "#yt-btn-next", function() {
+    $("#yt-btn-prev").show();
+    
+    var currentVidSrc = $("#yt-player").attr("src");
+    var currentVidID = currentVidSrc.replace("https://www.youtube.com/embed/", "");
+    console.log("currentVidId is " + currentVidID);
+    console.log("currentVidSrc is " + currentVidSrc);
+
+    var newVidID;
+
+    for (i = 0; i < videoIDsObj.length; i++) {
+        if (videoIDsObj[i] == currentVidID) {
+            if (i == videoIDsObj.length - 1) {
+                newVidID = videoIDsObj[0];
+            }
+            else {
+                newVidID = videoIDsObj[i + 1];
+            }
+            break;
+        }
+    }
+    console.log("newVidID is " + newVidID);
+    // var newVideoId = 
+    $("#yt-player").attr("src", "https://www.youtube.com/embed/" + newVidID);
+});
+
+$(document).on("click", "#yt-btn-prev", function() {
+    
+    var currentVidSrc = $("#yt-player").attr("src");
+    var currentVidID = currentVidSrc.replace("https://www.youtube.com/embed/", "");
+    console.log("currentVidId is " + currentVidID);
+    console.log("currentVidSrc is " + currentVidSrc);
+
+    var newVidID;
+
+    for (i = 0; i < videoIDsObj.length; i++) {
+        if (videoIDsObj[i] == currentVidID) {
+            if (i == 0) {
+                newVidID = videoIDsObj[videoIDsObj.length - 1];
+            }
+            else {
+                newVidID = videoIDsObj[i - 1];
+            }
+            break;
+        }
+    }
+    console.log("newVidID is " + newVidID);
+    // var newVideoId = 
+    $("#yt-player").attr("src", "https://www.youtube.com/embed/" + newVidID);
 });
 
 
@@ -297,22 +371,26 @@ function apiSongKickRun() {
 // !!!!! THIS DATE LINE IS INCOMPLETE - MUST PULL DATE FROM INPUT !!!!!
 // Also, can these IFs be combined into a neater code?
                 // Check within date range
-                if (response.resultsPage.results.event[i].start.date >= "2018-11-20" && response.resultsPage.results.event[i].start.date <= "2018-12-31") {
+                if (response.resultsPage.results.event[i].start.date >= "2018-12-01" && response.resultsPage.results.event[i].start.date <= "2018-12-02") {
                     // Check event not ended
                     if (response.resultsPage.results.event[i].flaggedAsEnded == false) {
                         // Check event not cancelled
                         if (response.resultsPage.results.event[i].status != "cancelled") {
-                            // Push events into eventsAllObj array
-                            eventsAllObj.push({
-                                num: "event" + (eventsAllObj.length + 1),
-                                name: response.resultsPage.results.event[i].displayName,
-                                venue:  response.resultsPage.results.event[i].venue.displayName,
-                                venuelocation: response.resultsPage.results.event[i].location.city,
-                                artist:  response.resultsPage.results.event[i].performance[0].artist.displayName,
-                                startdate:  response.resultsPage.results.event[i].start.date,
-                                starttime:  response.resultsPage.results.event[i].start.time,
-                                url:  response.resultsPage.results.event[i].uri,
-                            });
+                            // Make sure event has a title
+                            // if (response.resultsPage.results.event[i].displayName != null) {
+                                // Push events into eventsAllObj array
+                                eventsAllObj.push({
+                                    id: "event" + response.resultsPage.results.event[i].id,
+                                    num: "arraynum" + (eventsAllObj.length + 1),
+                                    name: response.resultsPage.results.event[i].displayName,
+                                    venue:  response.resultsPage.results.event[i].venue.displayName,
+                                    venuelocation: response.resultsPage.results.event[i].location.city,
+                                    artist:  response.resultsPage.results.event[i].performance[0].artist.displayName,
+                                    startdate:  response.resultsPage.results.event[i].start.date,
+                                    starttime:  response.resultsPage.results.event[i].start.time,
+                                    url:  response.resultsPage.results.event[i].uri,
+                                });
+                            // }
                         }
                     }
                 }    
@@ -329,7 +407,12 @@ function apiSongKickRun() {
                 eventsAllObj.splice(x, 1);
 
                 // Cut out extraneous text from event name (i.e. 'Beck at The Paramount (November 27)' becomes 'Beck')
-                var eventName = eventsObj[i].name.substring(0, eventsObj[i].name.indexOf(' at '));
+                var eventName = "";
+                if (eventsObj[i].name.includes(" at "))
+                    eventName = eventsObj[i].name.substring(0, eventsObj[i].name.indexOf(' at '));
+                else {
+                    eventName = eventsObj[i].artist;
+                }
 
                 // 
                 $("#form-results-events").append('\
@@ -341,7 +424,7 @@ function apiSongKickRun() {
                                 <p class="card-text event-details">Start Date: ' + eventsObj[i].startdate + '</p>\
                             </div>\
                             <div class="card-footer">\
-                                <a href="#" class="btn btn-primary button-load-video" id="youtubeInputSearch" data-artist="' + eventsObj[i].artist + '">Load Music Video</a>\
+                                <a href="#" class="btn btn-primary button-load-video" id="youtubeInputSearch" data-artist="' + eventsObj[i].artist + '" data-event="'+ eventsObj[i].id + '">Load Music Videos</a>\
                             </div>\
                         </div>\
                     </div>\
