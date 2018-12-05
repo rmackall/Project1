@@ -19,9 +19,9 @@
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    
-    <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css"> -->
+
+    <!-- jQuery CSS -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <!-- Custom styles for this template -->
     <link href="css/small-business.css" rel="stylesheet">
@@ -73,7 +73,9 @@
                 <label for="form-location-field">Location:</label>
                 <input class="search-form" type="text" id="form-location-field" name="form-enter-location" placeholder="Enter A Location" value="Denver">
                 <!-- <button type="button" id="form-location-use-current-btn">Use My Current Location</button> -->
-                <div class="search-form">
+                <p>From: <input class="datepicker" type="text" id="datepickermin"></p> <!--JQuery date picker-->
+                <p>To: <input  class="datepicker" type="text" id="datepickermax"></p> <!--JQuery date picker-->
+                <!-- <div class="search-form">
                 From:
                   <form action="" name="someform">
                     <select id="daydropdownfrom">
@@ -93,7 +95,7 @@
                     <select id="yeardropdownto">
                     </select> 
                   </form>
-                </div>
+                </div> -->
                 
                 <span><button type="button" class="btn btn-primary btn-md" id="form-run-songkick">Run SongKick API Search</button></span><br>
                 <span><button type="button" class="btn btn-primary btn-md" id="yt-btn-prev" style="display: none">Previous Video</button></span>
@@ -157,14 +159,16 @@
     
     <!-- JQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <!-- Javascript  Javascript -->
-    <script type="text/javascript" src="assets/javascript/javascript.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js"></script>
     <!-- Bootstrap core JavaScript -->
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="handlebars-v4.0.12.js"></script>
-    <script src="vendor/jquery/jquery.min.js"></script>
+    <!-- <script src="vendor/jquery/jquery.min.js"></script> -->
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Javascript  Javascript -->
+    <script type="text/javascript" src="assets/javascript/javascript.js"></script>
 
   </body>
 

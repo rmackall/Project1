@@ -1,3 +1,11 @@
+// Initial page - date/location
+// 
+// Once date/location entered, remove that field and have just youtube video with event details below it
+// 
+// 
+// 
+// 
+// 
 
 
 
@@ -148,50 +156,61 @@ $("#vidph-pic").attr("src", randImg);
 // Input form - date picker month array
 var monthtext=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'];
 
-// Input form - date picker from
-function populatedropdownfrom(dayfield, monthfield, yearfield) {
-    var today=new Date()
-    var dayfield=document.getElementById(dayfield)
-    var monthfield=document.getElementById(monthfield)
-    var yearfield=document.getElementById(yearfield)
-    for (var i=0; i<31; i++) {
-        dayfield.options[i]=new Option(i, i+1)
-        dayfield.options[today.getDate()]=new Option(today.getDate(), today.getDate(), true, true) //select today's day
-    }
-    for (var m=0; m<12; m++) {
-        monthfield.options[m]=new Option(monthtext[m], monthtext[m])
-        monthfield.options[today.getMonth()]=new Option(monthtext[today.getMonth()], monthtext[today.getMonth()], true, true) //select today's month
-    }
-    var thisyear=today.getFullYear()
-    for (var y=0; y<20; y++){
-        yearfield.options[y]=new Option(thisyear, thisyear)
-        thisyear+=1
-    }
-    yearfield.options[0]=new Option(today.getFullYear(), today.getFullYear(), true, true) //select today's year
-}
+// // Input form - date picker from
+// function populatedropdownfrom(dayfield, monthfield, yearfield) {
+//     var today=new Date()
+//     var dayfield=document.getElementById(dayfield)
+//     var monthfield=document.getElementById(monthfield)
+//     var yearfield=document.getElementById(yearfield)
+//     for (var i=0; i<31; i++) {
+//         dayfield.options[i]=new Option(i, i+1)
+//         dayfield.options[today.getDate()]=new Option(today.getDate(), today.getDate(), true, true) //select today's day
+//     }
+//     for (var m=0; m<12; m++) {
+//         monthfield.options[m]=new Option(monthtext[m], monthtext[m])
+//         monthfield.options[today.getMonth()]=new Option(monthtext[today.getMonth()], monthtext[today.getMonth()], true, true) //select today's month
+//     }
+//     var thisyear=today.getFullYear()
+//     for (var y=0; y<20; y++){
+//         yearfield.options[y]=new Option(thisyear, thisyear)
+//         thisyear+=1
+//     }
+//     yearfield.options[0]=new Option(today.getFullYear(), today.getFullYear(), true, true) //select today's year
+// }
 
-// Input form - date picker to
-function populatedropdownto(dayfield, monthfield, yearfield) {
-    var today=new Date();
-    var dayfield=document.getElementById(dayfield)
-    var monthfield=document.getElementById(monthfield)
-    var yearfield=document.getElementById(yearfield)
-    for (var i=0; i<31; i++) {
-        dayfield.options[i]=new Option(i, i+1)
-        dayfield.options[today.getDate()]=new Option(today.getDate() + 1, today.getDate() + 1, true, true) //select today's day
-    }
-    for (var m=0; m<12; m++) {
-        monthfield.options[m]=new Option(monthtext[m], monthtext[m])
-        monthfield.options[today.getMonth()]=new Option(monthtext[today.getMonth()], monthtext[today.getMonth()], true, true) //select today's month
-    }
-    var thisyear=today.getFullYear()
-    for (var y=0; y<20; y++){
-        yearfield.options[y]=new Option(thisyear, thisyear)
-        thisyear+=1
-    }
-    yearfield.options[0]=new Option(today.getFullYear(), today.getFullYear(), true, true) //select today's year
-    console.log("to date is " + today);
-}
+// // Input form - date picker to [examined to know what it does now!]
+// function populatedropdownto(dayfield, monthfield, yearfield) {
+//     var today=new Date(); // get today's date
+//     var dayfield=document.getElementById(dayfield) // put html id into a variable
+//     var monthfield=document.getElementById(monthfield) // put html id into a variable
+//     var yearfield=document.getElementById(yearfield) // put html id into a variable
+//     for (var i=0; i<31; i++) {
+//         dayfield.options[i]=new Option(i, i+1)
+//         dayfield.options[today.getDate()]=new Option(today.getDate() + 1, today.getDate() + 1, true, true) //select today's day
+//         // if (i<9) {
+//         //     $("#dayfield").attr("data-day", "0" + i);
+//         // }
+//         // else {
+//         //     $("#dayfield").attr("data-day", i);
+//         // }
+//     }
+//     for (var m=0; m<12; m++) {
+//         monthfield.options[m]=new Option(monthtext[m], monthtext[m])
+//         monthfield.options[today.getMonth()]=new Option(monthtext[today.getMonth()], monthtext[today.getMonth()], true, true) //select today's month
+//         // $("#monthfield").attr("data-month", m + 1);
+//     }
+//     var thisyear=today.getFullYear()
+//     for (var y=0; y<20; y++){
+//         yearfield.options[y]=new Option(thisyear, thisyear)
+//         thisyear+=1
+//     }
+//     yearfield.options[0]=new Option(today.getFullYear(), today.getFullYear(), true, true) //select today's year
+//     console.log("to date is " + today);
+// }
+
+
+var songKickMinDate
+var songKickMaxDate
 
 // API key
 var apiSongKickKey = "6pZngLm7sG0kGF4U";
@@ -216,19 +235,33 @@ var eventsObj = [];
 var headlineArtist;
 
 var videoIDsObj = [];
+var artistsLiked = [];
+var artistsDisliked = [];
 
                 //// **** LISTENERS **** ////
 
 // On load, populate date field and run initial songkick
 window.onload=function(){
-    populatedropdownfrom("daydropdownfrom", "monthdropdownfrom", "yeardropdownfrom")
-    populatedropdownto("daydropdownto", "monthdropdownto", "yeardropdownto")
+    // populatedropdownfrom("daydropdownfrom", "monthdropdownfrom", "yeardropdownfrom")
+    // populatedropdownto("daydropdownto", "monthdropdownto", "yeardropdownto")
+    $(".datepicker").datepicker({
+        format: "YYYY-MM-DD",
+        todayBtn: "linked",
+        autoclose: true,
+        todayHighlight: true
+    }).datepicker("setDate", new Date());    
     apiSongKickRun();
 }
 
+
 // Button to run SongKick API, using input City & Date
 $(document).on("click", "#form-run-songkick", function() {
-    apiSongKickRun();
+    if (songKickMinDate != null && songKickMaxDate != null) {
+        apiSongKickRun();
+    }
+    else {
+        alert("Enter the dates to search");
+    }
 });
 
 function topFunction() {
@@ -313,6 +346,27 @@ $(document).on("click", "#yt-btn-prev", function() {
 // API FUNCTION - pull events based on location and date
 function apiSongKickRun() {
 
+    // Grab dates from fields
+    songKickMinDate = $("#datepickermin").val();
+    songKickMaxDate = $("#datepickermax").val();  
+
+    // Convert dates to SongKick format YYYY-MM-DD
+    var songKickMinDateMonth = songKickMinDate.slice(0, 2);
+    console.log("month is " + songKickMinDateMonth);
+    var songKickMinDateDay = songKickMinDate.slice(3, 5);
+    console.log("day is " + songKickMinDateDay);
+    var songKickMinDateYear = songKickMinDate.slice(6, 10);
+    console.log("year is " + songKickMinDateYear);
+    songKickMinDate = songKickMinDateYear + "-" + songKickMinDateMonth + "-" + songKickMinDateDay;
+
+    var songKickMaxDateMonth = songKickMaxDate.slice(0, 2);
+    console.log("month is " + songKickMaxDateMonth);
+    var songKickMaxDateDay = songKickMaxDate.slice(3, 5);
+    console.log("day is " + songKickMaxDateDay);
+    var songKickMaxDateYear = songKickMaxDate.slice(6, 10);
+    console.log("year is " + songKickMaxDateYear);
+    songKickMaxDate = songKickMaxDateYear + "-" + songKickMaxDateMonth + "-" + songKickMaxDateDay;
+
     // Clear previous API search results
     eventsAllObj = [];
     eventsObj = [];
@@ -353,7 +407,7 @@ function apiSongKickRun() {
 
 
         // Query URL using location ID (e.g. 6404)
-        var queryURL = "https://api.songkick.com/api/3.0/metro_areas/" + locationID + "/calendar.json?apikey=" + apiSongKickKey;
+        var queryURL = "https://api.songkick.com/api/3.0/metro_areas/" + locationID + "/calendar.json?apikey=" + apiSongKickKey + "&min_date=" + songKickMinDate + "&max_date=" + songKickMaxDate;
         
 
         // Run 2nd JSON request, using location ID (e.g. 6404) to get events in area (array of events)
@@ -370,8 +424,8 @@ function apiSongKickRun() {
 
 // !!!!! THIS DATE LINE IS INCOMPLETE - MUST PULL DATE FROM INPUT !!!!!
 // Also, can these IFs be combined into a neater code?
-                // Check within date range
-                if (response.resultsPage.results.event[i].start.date >= "2018-12-01" && response.resultsPage.results.event[i].start.date <= "2018-12-02") {
+                // // Check within date range
+                // if (response.resultsPage.results.event[i].start.date >= "2019-01-01" && response.resultsPage.results.event[i].start.date <= "2019-01-31") {
                     // Check event not ended
                     if (response.resultsPage.results.event[i].flaggedAsEnded == false) {
                         // Check event not cancelled
@@ -393,7 +447,7 @@ function apiSongKickRun() {
                             // }
                         }
                     }
-                }    
+                // }    
             }
 
             console.log(eventsAllObj);
