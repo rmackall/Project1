@@ -499,11 +499,13 @@ function apiSongKickRun() {
 
                 $("#myTableBody").append('\
                     <tr>\
-                        <td><a href="#" class="button-load-video" id="youtubeInputSearch" data-artist="' + eventsAllObj[i].artist + '" data-event="'+ eventsAllObj[i].id + '">' + eventsAllObj[i].artist + '</a></td>\
+                        <td>' + eventsAllObj[i].artist + '</td>\
                         <td>' + eventsAllObj[i].venue + '</td>\
                         <td>' + eventName + '</td>\
                         <td>' + eventsAllObj[i].startdate + '</td>\
                         <td>' + startTime + '</td>\
+                        <td><a href="#" class="button-load-video" id="youtubeInputSearch" data-artist="' + eventsAllObj[i].artist + '" data-event="'+ eventsAllObj[i].id + '">Load Videos</a></td>\
+                        <td><a href="' + eventsAllObj[i].url + '" target="_blank" class="button-songkick-link" data-artist="' + eventsAllObj[i].artist + '" data-event="'+ eventsAllObj[i].id + '">Event Page</a></td>\
                     </tr>\
                 ');
             }
