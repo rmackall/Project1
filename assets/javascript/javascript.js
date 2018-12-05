@@ -65,8 +65,10 @@ window.searchModule = {
 
     for (i = 0; i < newResponse.items.length; i++) {
         videoIDsObj.push(newResponse.items[i].id.videoId);
-        console.log(videoIDsObj[i]);
+        
     }
+
+    console.log(videoIDsObj);
 
     // dave
     $("#vidph").html('\
@@ -250,6 +252,11 @@ window.onload=function(){
         autoclose: true,
         todayHighlight: true
     }).datepicker("setDate", new Date());    
+
+    // Get table ready
+    $('#myTable').DataTable();
+
+    // Run initial API query
     apiSongKickRun();
 }
 
@@ -274,11 +281,10 @@ $(document).on("click", ".button-load-video", function(event) {
     headlineArtist = $(this).attr("data-artist");
 
     $("#bandInput").val('"' + headlineArtist + '" music');
+    console.log("headline artist is " + $("#bandInput").val());
     $("#bandButton").click();
     topFunction(); 
     $("#yt-btn-next").show();
-
-    console.log("headline music " + headlineArtist);
     // console.log("running loadVideo()");
     // loadVideo(headlineArtist);
 
@@ -451,39 +457,58 @@ function apiSongKickRun() {
             }
 
             console.log(eventsAllObj);
+            console.log(eventsAllObj.length);
 
             // Pull x number of events from local array of events (i.e. eventsAllObj array).
             // Deletes them from the array so they aren't shown again.
             // !!!!! IF THE SAME SEARCH IS RUN, PERHAPS CONTINUE TO READ AND REMOVE FROM REMAINING ARRAY.  THIS WILL AVOID DUPLICATES.
-            for (var i = 0; i < 6; i++) {
-                var x = Math.floor(Math.random()*eventsAllObj.length);
-                eventsObj.push(eventsAllObj[x]);
-                eventsAllObj.splice(x, 1);
+            $("#myTableBody").html("");
+
+            for (var i = 0; i < eventsAllObj.length; i++) {
+                console.log("i is " + i);
+                // var x = Math.floor(Math.random()*eventsAllObj.length);
+                // eventsObj.push(eventsAllObj[x]);
+                // eventsAllObj.splice(x, 1);
 
                 // Cut out extraneous text from event name (i.e. 'Beck at The Paramount (November 27)' becomes 'Beck')
                 var eventName = "";
-                if (eventsObj[i].name.includes(" at "))
-                    eventName = eventsObj[i].name.substring(0, eventsObj[i].name.indexOf(' at '));
+                if (eventsAllObj[i].name.includes(" at "))
+                    eventName = eventsAllObj[i].name.substring(0, eventsAllObj[i].name.indexOf(' at '));
                 else {
-                    eventName = eventsObj[i].artist;
+                    eventName = eventsAllObj[i].artist;
+                }
+                eventName = eventName.replace(eventsAllObj[i].artist, "");
+                if (eventName.startsWith(" and ")){
+                    eventName = eventName.replace(" and ", "");
+                }
+                if (eventName.startsWith(" with ")){
+                    eventName = eventName.replace(" with ", "");
+                }
+                if (eventName.startsWith(", ")){
+                    eventName = eventName.replace(", ", "");
                 }
 
-                // 
-                $("#form-results-events").append('\
-                    <div class="col-md-4 mb-4">\
-                        <div class="card h-100">\
-                            <div class="card-body">\
-                                <h2 class="card-title event-name">' + eventName + '</h2>\
-                                <p class="card-text event-details">Venue: ' + eventsObj[i].venue + '</p>\
-                                <p class="card-text event-details">Start Date: ' + eventsObj[i].startdate + '</p>\
-                            </div>\
-                            <div class="card-footer">\
-                                <a href="#" class="btn btn-primary button-load-video" id="youtubeInputSearch" data-artist="' + eventsObj[i].artist + '" data-event="'+ eventsObj[i].id + '">Load Music Videos</a>\
-                            </div>\
-                        </div>\
-                    </div>\
+                var startTime = "";
+                if (eventsAllObj[i].starttime == null) {
+                    startTime = "18:00";
+                }
+                else {
+                    startTime = eventsAllObj[i].starttime;
+                    startTime = startTime.slice(0, -3);
+                }
+
+                $("#myTableBody").append('\
+                    <tr>\
+                        <td><a href="#" class="button-load-video" id="youtubeInputSearch" data-artist="' + eventsAllObj[i].artist + '" data-event="'+ eventsAllObj[i].id + '">' + eventsAllObj[i].artist + '</a></td>\
+                        <td>' + eventsAllObj[i].venue + '</td>\
+                        <td>' + eventName + '</td>\
+                        <td>' + eventsAllObj[i].startdate + '</td>\
+                        <td>' + startTime + '</td>\
+                    </tr>\
                 ');
             }
+
+            $('#myTable').DataTable();
 
             // Prints all remaining events in eventsAllObj array
             // console.log(eventsAllObj);
