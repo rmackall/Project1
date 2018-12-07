@@ -1,21 +1,55 @@
-    html,
-    body {
+    html {
         height: 100%;
-        min-height: 100%;
-        height: auto;
-        margin: 0 auto;
-        position: relative;
-        /* margin-bottom: 50px; */
     }
 
-    .wrapper {
+    html,
+    body {
+        /* height: 100%; */
         min-height: 100%;
-        height: auto !important;
+        /* height: auto; */
+        margin: 0 auto;
+        position: relative;
+        padding: 0;
+        /* color: white;
+        background-color: black; */
+        /* margin-bottom: 50px; */
+        background-image: url(../images/bg-wallpaper.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: center center;
+    }
+
+    .navbar, .footer {
+        opacity: 0.7;
+    }
+
+    a a:hover, a:active, a:visited, a:link {
+        color: #007bff;
+        font-weight: 600;
+    }
+
+    .link-liked {
+        color: white!important;
+        font-weight: 600;
+    }
+
+    #content-wrapper {
+        /* position: absolute;
+        top: 0;
+        left: 0;
+        right: 0; */
+        min-height: 100%;
+        /* height: auto !important; */
         height: 100%;
         /* Negative indent footer by its height */
         margin: 0 auto -50px;
         /* Pad bottom by footer height */
-        padding: 0 0 50px;
+        padding: 50px 50px 5px 50px;
+    }
+
+    #content {
+        color: white;
     }
 
     .footer {
@@ -64,6 +98,19 @@
         margin-right: 0;
     }
 
+    #bg-img {
+        position: absolute;
+        bottom: -200px;
+    }
+
+    #content-wrapper {
+        /* background-image: url(../images/bg-wallpaper.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center top; */
+    }
+
 
     @media screen and (max-width: 992px) {
         #content-wrapper {
@@ -94,3 +141,4 @@
         }
 
     }
+

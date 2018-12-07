@@ -62,10 +62,15 @@
 
   <!-- Page Content -->
 
-  <div class="container wrapper" id="content-wrapper">
+  <!-- <div class="container-page container-fluid"> -->
 
+
+
+  <!-- <img src="assets/images/bg-wallpaper.png" id="bg-img" width="100%" z-index="500"> -->
+
+  <div class="container wrapper container-content container-fluid" id="content-wrapper">
     <!-- Heading Row -->
-    <div class="row my-4">
+    <div class="row my-4" id="content">
       <div class="col-lg-8">
         <div id="vidph">
           <img class="img-fluid rounded" id="vidph-pic" src="assets/images/vidph1.jpg" alt="">
@@ -107,10 +112,14 @@
                 </div> -->
 
             <span><button type="button" class="btn btn-primary btn-md" id="form-run-songkick">Run SongKick API Search</button></span><br>
-            <span><button type="button" class="btn btn-primary btn-md" id="yt-btn-prev" style="display: none">Previous
-                Video</button></span>
-            <span><button type="button" class="btn btn-primary btn-md" id="yt-btn-next" style="display: none">Next
-                Video</button></span>
+            <span><button type="button" class="btn btn-primary btn-md" id="yt-btn-prev" style="display: none">Previous Video</button></span>
+            <span><button type="button" class="btn btn-primary btn-md" id="yt-btn-next" style="display: none">Next Video</button></span>
+            <span><button type="button" class="btn btn-primary btn-md" id="yt-btn-openinyt" style="display: none">"Video Unavailable" Fix</button></span>
+            <br>
+            <span><button type="button" class="btn btn-primary btn-md" id="yt-btn-like" style="display: none">Interested</button></span>
+            <span><button type="button" class="btn btn-primary btn-md" id="yt-btn-dislike" style="display: none">Not Interested</button></span>
+            <br>
+            <span><button type="button" class="btn btn-primary btn-md" id="yt-btn-share" style="display: none">Share Liked Artists & Events</button></span>
           </div>
           <span>Results for: </span><span id="form-results-location">Your City</span>
         </form>
@@ -122,9 +131,9 @@
         <div class="row my-4">
           <div class="col-lg-8" id="">
             <div class="searchBox">
-              <h1>Type something to search!</h1>
-              <input id="bandInput" /><button id="bandButton">Submit</button>
-              <div class="error">Please enter a value!</div>
+              <!-- <h1>Type something to search!</h1> -->
+              <input id="bandInput" style="visibility:hidden"><button id="bandButton" style="visibility:hidden"></button>
+              <!-- <div class="error">Please enter a value!</div> -->
             </div>
 
             <div class="wrapper">
@@ -133,13 +142,13 @@
                 <iframe src="" frameborder="0" allowfullscreen="" id="yt-player" width="600" height="400"></iframe>
                 <div id="yt-destination" class="yt-results"></div>
                 <script id="yt-template" type="text/x-handlebars-template">
-                  {{#each items}}
+                  <!-- {{#each items}}
                   <div data-video-id="{{ id.videoId }}" class="result">
                     <img src="{{ snippet.thumbnails.medium.url }}" width="{{ snippet.thumbnails.medium.width }}" height="{{ snippet.thumbnails.medium.height }}"/>
                     <h2>{{ snippet.title }}</h2>
                     <p>{{ snippet.description }}</p>
                   </div>
-                  {{/each}}
+                  {{/each}} -->
                 </script>
               </div>
             </div>
@@ -175,15 +184,15 @@
         </table>
       </div>
     </div>
+  </div>
 
-    <footer class="py-2 bg-dark footer">
+  <footer class="py-2 bg-dark footer">
       <div class="container"></div>
       <p class="footer-block m-0 text-center text-white">Copyright &copy; BranchOut 2018</p>
+  </footer>
+    
 
-      <!-- /.container -->
-    </footer>
-
-  </div>
+  <!-- </div> -->
 
 
     <!-- JQuery -->
