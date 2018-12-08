@@ -48,7 +48,7 @@
         <!-- <marquee behavior="scroll" direction="left">HTML scrolling text... </marquee> -->
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="#">Home
+            <a class="nav-link" href="#">New Search
               <span class="sr-only">(current)</span>
             </a>
           </li>
@@ -78,101 +78,71 @@
       </div>
       <!-- /.col-lg-8 -->
       <div class="col-lg-4 msrep" id="sidebar-search">
-        <p>Enter your location and browse artists playing in your area. Discover someone new and support live music.</p>
-        <form>
-          <div>
-            <label for="form-location-field">Location:</label>
-            <input class="search-form" type="text" id="form-location-field" name="form-enter-location" placeholder="Enter A Location"
-              value="Denver">
-            <!-- <button type="button" id="form-location-use-current-btn">Use My Current Location</button> -->
-            <p>From: <input class="datepicker" type="text" id="datepickermin"></p>
-            <!--JQuery date picker-->
-            <p>To: <input class="datepicker" type="text" id="datepickermax"></p>
-            <!--JQuery date picker-->
-            <!-- <div class="search-form">
-                From:
-                  <form action="" name="someform">
-                    <select id="daydropdownfrom">
-                    </select> 
-                    <select id="monthdropdownfrom">
-                    </select> 
-                    <select id="yeardropdownfrom">
-                    </select> 
-                  </div>
-                    <div class="search-form">
-                To:
-                  <form action="" name="someform">
-                    <select id="daydropdownto">
-                    </select> 
-                    <select id="monthdropdownto">
-                    </select> 
-                    <select id="yeardropdownto">
-                    </select> 
-                  </form>
-                </div> -->
+        <section id="sidebar-search-initial">
+          <p>Enter your location and browse artists playing in your area. Discover someone new and support live music.</p>
+          <form>
+            <div>
+              <label for="form-location-field">Location:</label>
+              <input class="search-form" type="text" id="form-location-field" name="form-enter-location" placeholder="Enter A Location"
+                value="Denver">
+              <!-- <button type="button" id="form-location-use-current-btn">Use My Current Location</button> -->
+              <p>From: <input class="datepicker" type="text" id="datepickermin"></p>
+              <!--JQuery date picker-->
+              <p>To: <input class="datepicker" type="text" id="datepickermax"></p>
+              <!--JQuery date picker-->
+              <!-- <div class="search-form">
+                  From:
+                    <form action="" name="someform">
+                      <select id="daydropdownfrom">
+                      </select> 
+                      <select id="monthdropdownfrom">
+                      </select> 
+                      <select id="yeardropdownfrom">
+                      </select> 
+                    </div>
+                      <div class="search-form">
+                  To:
+                    <form action="" name="someform">
+                      <select id="daydropdownto">
+                      </select> 
+                      <select id="monthdropdownto">
+                      </select> 
+                      <select id="yeardropdownto">
+                      </select> 
+                    </form>
+                  </div> -->
 
-            <span><button type="button" class="btn btn-primary btn-md" id="form-run-songkick">Run SongKick API Search</button></span><br>
-            <span><button type="button" class="btn btn-primary btn-md" id="yt-btn-prev" style="display: none">Previous Video</button></span>
-            <span><button type="button" class="btn btn-primary btn-md" id="yt-btn-next" style="display: none">Next Video</button></span>
-            <span><button type="button" class="btn btn-primary btn-md" id="yt-btn-openinyt" style="display: none">"Video Unavailable" Fix</button></span>
-            <br>
-            <span><button type="button" class="btn btn-primary btn-md" id="yt-btn-like" style="display: none">Interested</button></span>
-            <span><button type="button" class="btn btn-primary btn-md" id="yt-btn-dislike" style="display: none">Not Interested</button></span>
-            <br>
-            <span><button type="button" class="btn btn-primary btn-md" id="yt-btn-share" style="display: none">Share Liked Artists & Events</button></span>
-          </div>
-          <span>Results for: </span><span id="form-results-location">Your City</span>
+              <span><button type="button" class="btn btn-primary btn-md" id="form-run-songkick">Run SongKick API Search</button></span><br>
+            </div>
+          </section>
+        <section id="sidebar-search-after">
+            <section>
+              <span><button type="button" class="btn btn-primary btn-md" id="yt-btn-prev" style="display: none">Previous Video</button></span>
+              <span><button type="button" class="btn btn-primary btn-md" id="yt-btn-next" style="display: none">Next Video</button></span>
+              <span><button type="button" class="btn btn-primary btn-md" id="yt-btn-openinyt" style="display: none">"Video Unavailable" Fix</button></span>
+            </section>
+            <section>
+              <span><button type="button" class="btn btn-primary btn-md" id="yt-btn-like" style="display: none">Interested</button></span>
+              <span><button type="button" class="btn btn-primary btn-md" id="yt-btn-dislike" style="display: none">Not Interested</button></span>
+            </section>
+            <section>
+              <span><button type="button" class="btn btn-primary btn-md" id="yt-btn-share" style="display: none">Share Liked Artists & Events</button></span>
+            </section>          
+          </section>
         </form>
       </div>
 
-      <div class="container msrep"> 
-
+      <div class="container msrep" id="tablediv"> 
         <!-- Heading Row -->
-        <div class="row my-4">
-          <div class="col-lg-8" id="">
-            <div class="searchBox">
-              <!-- <h1>Type something to search!</h1> -->
-              <input id="bandInput" style="visibility:hidden"><button id="bandButton" style="visibility:hidden"></button>
-              <!-- <div class="error">Please enter a value!</div> -->
-            </div>
-
-            <div class="wrapper">
-              <h1></h1>
-              <div class="yt-wrapper">
-                <iframe src="" frameborder="0" allowfullscreen="" id="yt-player" width="600" height="400"></iframe>
-                <div id="yt-destination" class="yt-results"></div>
-                <script id="yt-template" type="text/x-handlebars-template">
-                  <!-- {{#each items}}
-                  <div data-video-id="{{ id.videoId }}" class="result">
-                    <img src="{{ snippet.thumbnails.medium.url }}" width="{{ snippet.thumbnails.medium.width }}" height="{{ snippet.thumbnails.medium.height }}"/>
-                    <h2>{{ snippet.title }}</h2>
-                    <p>{{ snippet.description }}</p>
-                  </div>
-                  {{/each}} -->
-                </script>
-              </div>
-            </div>
-
-
-
-
-            <!-- /.col-md-4 -->
-          </div>
-          <!-- /.row -->
-
-
-
-
-          <div class="row" id="form-results-events"></div>
-
-        </div>
+        <div class="row tablerow">
         <!-- /.container -->
+        <h4 style="text-align: center; width: 100%">Results for: <span id="form-results-location">Your City</span></h4>
         <table id="myTable" class="display">
           <thead>
               <tr>
                   <th>Artist</th>
                   <th>Venue</th>
-                  <th>Support Artists</th>
+                  <!-- <th>Support Artists</th> -->
                   <th>Date</th>
                   <th>Time</th>
                   <th>Load Videos</th>
@@ -184,6 +154,14 @@
         </table>
       </div>
     </div>
+    <div class="searchBox">
+      <!-- <h1>Type something to search!</h1> -->
+      <input id="bandInput" style="visibility:hidden"><button id="bandButton" style="visibility:hidden"></button>
+      <!-- <div class="error">Please enter a value!</div> -->
+    <div class="yt-wrapper">
+      <iframe src="" frameborder="0" allowfullscreen="" id="yt-player" width="600" height="400"></iframe>
+      <div id="yt-destination" class="yt-results"></div>
+      <script id="yt-template" type="text/x-handlebars-template">
   </div>
 
   <footer class="py-2 bg-dark footer">

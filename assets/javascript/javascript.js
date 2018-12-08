@@ -288,8 +288,22 @@ $(document).on("click", ".button-load-video", function(event) {
     $("#yt-btn-openinyt").show();
     $("#yt-btn-like").show();
     $("#yt-btn-dislike").show();
-    // console.log("running loadVideo()");
-    // loadVideo(headlineArtist);
+
+
+    for (var i = 0; i < eventsAllObj.length; i++) {
+        if (eventsAllObj[i].artist == headlineArtist) {
+            var time;
+            if (eventsAllObj[i].starttime == null) {
+                time = "18:00"
+            }
+            $("#sidebar-search-initial").html("<section class='results-text'>Artist: " + eventsAllObj[i].artist + "\
+                <br>Venue: " + eventsAllObj[i].venue + "\
+                <br>Start Date: " + eventsAllObj[i].startdate + "\
+                <br>Start Time: " + time + "\
+                <br><a href='" + eventsAllObj[i].url + "' target='_blank'>Songkick Event Page</a>\
+                <br><br></section>")
+        }
+    }    
 });
 
 $(document).on("click", "#yt-btn-like", function(event) {
@@ -318,6 +332,11 @@ $(document).on("click", "#yt-btn-dislike", function(event) {
     $("#vidph").html('<img class="img-fluid rounded" id="vidph-pic" src="assets/images/vidph1.jpg" alt=""></img>');
     var randImg = imagesObj[Math.floor(Math.random() * imagesObj.length)];
     $("#vidph-pic").attr("src", randImg);
+    $("#sidebar-search-initial").html("Load more videos or send your favourited events to a friend.");
+    $("#yt-btn-next").hide();
+    $("#yt-btn-openinyt").hide();
+    $("#yt-btn-like").hide();
+    $("#yt-btn-dislike").hide();
     buildEventTable();
 });
 
@@ -631,7 +650,6 @@ function buildEventTable() {
             <tr id="eventsAllObj' + i + '">\
                 <td>' + eventsAllObj[i].artist + '</td>\
                 <td>' + eventsAllObj[i].venue + '</td>\
-                <td>' + eventName + '</td>\
                 <td>' + eventsAllObj[i].startdate + '</td>\
                 <td>' + startTime + '</td>\
                 <td><a href="#" class="button-load-video" id="loadVidBtn' + i + '" data-artist="' + eventsAllObj[i].artist + '" data-event="'+ eventsAllObj[i].id + '">Load Videos</a></td>\
@@ -656,7 +674,12 @@ function buildEventTable() {
 
         for (j = 0; j < artistsLiked.length; j++) {
             if (eventsAllObj[i].artist == artistsLiked[j]) {
-                $("#eventsAllObj" + i).css("background-color", "#007bff");
+                $("#eventsAllObj" + i).css({
+                    color: "#fff",
+                    // "background-color": "#007bff"
+                    "background-color": "black"
+                    });
+                // $("#eventsAllObj" + i).css("background-color", "#007bff");
                 $("#loadVidBtn" + i).addClass("link-liked");
                 $("#eventPageBtn" + i).addClass("link-liked");
                 console.log(eventsAllObj[i].artist + " is the same as liked " + artistsLiked[j]);
