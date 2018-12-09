@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="css/small-business.css" rel="stylesheet">
+
+
+</head>
+<body>
+   
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+    <a class="navbar-brand" href="#">BranchOut</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="index.html">Home
+          <span class="sr-only">(current)</span>
+            </a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="contact.html">Contact</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+    <br>
+
+<div class="container">
+
+<div class="card-deck">
+<div class="card">
+<div class="card-body">
+<h5 class="card-title">Dave Ellis</h5>
+<p class="card-text"></p>
+</div>
+<div class="card-footer">
+<a href="mailto:email@address.com">Email</a>
+</div>
+</div>
+<div class="card">
+<div class="card-body">
+<h5 class="card-title">Jesus Acosta</h5>
+<p class="card-text"></p>
+</div>
+<div class="card-footer">
+  <a href="mailto:email@address.com">Email</a>
+</div>
+  </div>
+    </div>
+
+        <br>
+
+<div class="card-deck">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Oscar Cervantes</h5>
+        <p class="card-text"></p>
+    </div>
+  <div class="card-footer">
+    <a href="mailto:email@address.com">Email</a>
+  </div>
+    </div>
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Rich Mackall</h5>
+      <p class="card-text">Entrepreneurial, Collaborative, hard-working and technically skilled professional known for accuracy and being able to manage multiple tasks.</p>
+    </div>
+  <div class="card-footer">
+    <a href="mailto:richard.t.mackall@gmail.com">Email</a>
+  </div>
+    </div>
+      </div>
+
+      <br>
+                  
+
+    <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase.js"></script>
+
+    </head>
+                            
+    <body>
+
+      <h1> Sign Up For Our Monthly Newsletter</h1>
+                            
+  <label for="name-input">Name:</label>
+  <input class="form-control" id="name-input" type="text">
+  <label for="email-input">Email:</label>
+  <input class="form-control" id="email-input" type="text">
+                              
+   <br>
+
+  <button id="click-button" type="submit">Submit</button>
+                            
+  <hr>
+                            
+  <div id="displayed-data"></div>
+                            
+                            
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+                            
+  <script>
+    var config = {
+    apiKey: "AIzaSyAZsl4rUviKEnIqonmluU8i5SGpUbTyhI4",
+    authDomain: "project1-40785.firebaseapp.com",
+    databaseURL: "https://project1-40785.firebaseio.com",
+    projectId: "project1-40785",
+    storageBucket: "project1-40785.appspot.com",
+    messagingSenderId: "385707695900"
+  };
+                            
+  firebase.initializeApp(config);
+                            
+  var database = firebase.database();
+                            
+  var name = "";
+  var email = "";
+                            
+  $("#click-button").on("click", function(event) {
+        event.preventDefault();
+                            
+      name = $("#name-input").val().trim();
+      email = $("#email-input").val().trim();
+                            
+      database.ref().set({
+      name: name,
+      email: email,
+            });
+      });
+                            
+    
+  </script>
+
+<footer class="py-2 bg-dark footer">
+    <div class="container"></div>
+      <p class="m-0 text-center text-white">Copyright &copy; BranchOut 2018</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+</body>
+</html>
