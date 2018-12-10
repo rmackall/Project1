@@ -1,3 +1,21 @@
+# BranchOut
+
+This whole project was started in order to provide a one stop place for checking out new bands and branching out. 
+
+# Motivation 
+
+Our motivation came from looking at different websites and noticing that they didn't have the best UI. In order to check out the artist's music you had to scroll down to the bottom just to see a video. With that said sometimes their video didn't work. With our page you can explore different artists playing near you and also sample their music without having to scroll. 
+
+# Screenshots
+## Preview
+![Branchout Preview](https://i.imgur.com/Cy0glvG.jpg)
+![Branchout Preview1](https://i.imgur.com/CUXaYiq.png)
+
+# API Reference
+Youtube API
+Songkick API
+
+
 # [Start Bootstrap - Small Business](https://startbootstrap.com/template-overviews/small-business/)
 
 [Small Business](http://startbootstrap.com/template-overviews/small-business/) is a responsive marketing landing page template for [Bootstrap](http://getbootstrap.com/) created by [Start Bootstrap](http://startbootstrap.com/).
